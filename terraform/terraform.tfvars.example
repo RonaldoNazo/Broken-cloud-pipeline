@@ -1,0 +1,26 @@
+# Example Terraform variables file
+# Copy this file to terraform.tfvars and fill in your values
+
+# AWS Configuration
+aws_region = "eu-central-1"
+
+
+# Default Tags
+tags = {
+  environment = "develop"
+  product     = "cloud"
+  service     = "pipeline"
+}
+
+# VPC CIDR Blocks
+application_vpc_cidr = "10.40.0.0/16"
+jenkins_vpc_cidr     = "10.41.0.0/16"
+
+# Route53 Configuration
+route53_zone_name = "ustai.net"
+
+# Notifications
+notification_email = "nazoaldo@gmail.com"
+
+# Budget Configuration
+budget_limit_amount = "1"

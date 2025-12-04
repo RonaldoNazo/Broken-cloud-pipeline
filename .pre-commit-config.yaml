@@ -1,0 +1,78 @@
+# Pre-commit hooks configuration
+# Install: pip install pre-commit
+# Setup: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # General pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: check-yaml
+        name: Check YAML syntax
+        args: ['--safe']
+      - id: check-json
+        name: Check JSON syntax
+      - id: check-added-large-files
+        name: Check for large files
+        args: ['--maxkb=500']
+      - id: check-case-conflict
+        name: Check for case conflicts
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+      - id: detect-private-key
+        name: Detect private keys
+      - id: mixed-line-ending
+        name: Check mixed line endings
+
+  # Terraform hooks
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.88.4
+    hooks:
+      - id: terraform_fmt
+        name: Terraform format
+        args:
+          - --args=-recursive
+
+      - id: terraform_validate
+        name: Terraform validate
+        args:
+          - --hook-config=--retry-once-with-cleanup=true
+          - --tf-init-args=-upgrade
+
+      - id: terraform_docs
+        name: Terraform docs
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--create-file-if-not-exist=true
+
+      - id: terraform_tflint
+        name: Terraform lint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+          - --args=--module
+
+      - id: terraform_tfsec
+        name: Terraform security scan (tfsec)
+        args:
+          - --args=--minimum-severity=MEDIUM
+
+  # Security and compliance scanning with Checkov
+  - repo: https://github.com/bridgecrewio/checkov
+    rev: 3.2.1
+    hooks:
+      - id: checkov
+        name: Checkov security scan
+        args:
+          - --quiet
+          - --framework=terraform
+          - --skip-check=CKV_AWS_79,CKV_AWS_144,CKV_AWS_145,CKV2_AWS_5
+          - --compact
+        verbose: true
+        files: \.tf$
+        exclude: \.terraform/.*$
