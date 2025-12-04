@@ -37,17 +37,17 @@ curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/instal
 choco install tflint
 ```
 
-#### TFSec (Terraform Security Scanner)
+#### Trivy (Security Scanner)
 
 ```bash
 # macOS
-brew install tfsec
+brew install trivy
 
 # Linux
-curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
 # Windows (Chocolatey)
-choco install tfsec
+choco install trivy
 ```
 
 #### Checkov (Security Scanner)
@@ -145,13 +145,14 @@ SKIP=checkov git commit -m "your commit message"
 - **terraform_validate**: Validate Terraform configuration
 - **terraform_docs**: Auto-generate documentation
 - **terraform_tflint**: Lint Terraform code
-- **terraform_tfsec**: Security scanning with tfsec
+- **terraform_trivy**: Security scanning with trivy (replaces deprecated tfsec)
 
 ### 3. Security Scanning
 
 - **checkov**: Comprehensive security and compliance scanning
   - Scans for security misconfigurations
   - Checks compliance with best practices
+  - Downloads external Terraform modules for analysis
   - Skips certain checks that may not apply
 
 ## Troubleshooting

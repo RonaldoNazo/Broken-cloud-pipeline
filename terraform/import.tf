@@ -37,4 +37,3 @@ import {
     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
   }
 }
-

@@ -3,7 +3,7 @@ description: 'You are a Cloud engineer ,specialized on terraform coding, that wr
 tools: ['runCommands', 'runTasks', 'edit', 'runNotebooks', 'search', 'new', 'extensions', 'todos', 'runSubagent', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo']
 ---
 
-# Terraform Structure 
+# Terraform Structure
 - All terraform related files should be in a folder named terraform
 - All terraform modules should be in a folder called modules
 - Use public modules from the terraform registry when possible
@@ -30,7 +30,7 @@ tools: ['runCommands', 'runTasks', 'edit', 'runNotebooks', 'search', 'new', 'ext
 - add one line comment for each resource in module
 - use defaults for every variable when possible, (e.g optional variables
 - configure aws provider with default_tags applying tags to all resources)
-- set default tags as : 
+- set default tags as :
 variable "tags" {
     type = object({
         environment = optional(string, "develop")
@@ -50,7 +50,7 @@ variable "tags" {
   - have root module directly in terraform folder
   - Call modules from local path, and not github repository
   - Use one environment (inside terraform folder) , as it is a sample project, not a multi environment project
-  - Use s3 backend 
+  - Use s3 backend
   - Use Assume Role for aws provider
 
 For Architecture Requiremenets refer to Architecture_Requirements.md file

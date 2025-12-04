@@ -3,7 +3,7 @@
 ## Networking Components
 
 VPC 1 :
-    - Name: Application-VPC 
+    - Name: Application-VPC
     - CIDR: 10.40.0.0/16
     - 4 Subnets (2 Public, 2 Private)
     - 2 Route Tables
@@ -27,7 +27,7 @@ Application/Jenkins deployed as ECS with EC2 , deployed as a service , fronted b
 EC2 Container Instances:
     - Desired number 2 per each VPC (4 in total)
     - t3.micro instance type
-    - Amazon Linux 2 AMI 
+    - Amazon Linux 2 AMI
     - Auto Scaling Group for each ECS Cluster
     - Deployed in Private Subnets
 
@@ -48,7 +48,7 @@ ECS Tasks:
         - Container Image: 'infrastructureascode/hello-world'
         - CPU: 256
         - Memory: 512
-        - Container port : 8000 
+        - Container port : 8000
         - Health check on /health
     - Jenkins Task Definition:
         - Container Image: jenkins/jenkins:lts
@@ -65,7 +65,7 @@ ALB:
 
 ## Security
 
-WAF : 
+WAF :
     - Create a waf for both ALBs
     - Allow only https traffic
     - For Jenkins ALB allow only traffic from Albania IP ranges using GeoMatch
@@ -87,7 +87,7 @@ SNS :
     - Create a sns topic to send alarm notifications to
     - Subscribe an email : nazoaldo@gmail.com
 
-S3 : 
+S3 :
     - Create an s3 bucket for ALB access logs, ECS container logs and pipeline logs.
     - Attach a bucket policy allowing log writes from ALB and ECS services.
 
@@ -97,4 +97,3 @@ Enable Cost Allocation Tags for tag name "product",
 
 Enable AWS Budgets to monitor costs and set alerts if daily costs $ exceed 1 USD . Set up only for tag name "product" with value "cloud"
 Send notifications to the SNS topic
-

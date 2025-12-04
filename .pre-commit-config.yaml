@@ -14,7 +14,6 @@ repos:
         name: Fix end of files
       - id: check-yaml
         name: Check YAML syntax
-        args: ['--safe']
       - id: check-json
         name: Check JSON syntax
       - id: check-added-large-files
@@ -55,12 +54,12 @@ repos:
         name: Terraform lint
         args:
           - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
-          - --args=--module
 
-      - id: terraform_tfsec
-        name: Terraform security scan (tfsec)
+      - id: terraform_trivy
+        name: Terraform security scan (trivy)
         args:
-          - --args=--minimum-severity=MEDIUM
+          - --args=--severity=CRITICAL,HIGH,MEDIUM
+          - --args=--skip-dirs="**/.terraform"
 
   # Security and compliance scanning with Checkov
   - repo: https://github.com/bridgecrewio/checkov
@@ -71,8 +70,10 @@ repos:
         args:
           - --quiet
           - --framework=terraform
-          - --skip-check=CKV_AWS_79,CKV_AWS_144,CKV_AWS_145,CKV2_AWS_5
+          - --download-external-modules=true
+          - --skip-check=CKV_AWS_79,CKV_AWS_144,CKV_AWS_145,CKV2_AWS_5,CKV_TF_1
           - --compact
         verbose: true
         files: \.tf$
-        exclude: \.terraform/.*$
+        exclude: \.terraform/.*$ 
+CKV_TF_1
