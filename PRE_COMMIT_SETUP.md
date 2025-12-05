@@ -56,6 +56,18 @@ choco install trivy
 pip install checkov
 ```
 
+#### detect-secrets (Credential Detection)
+
+```bash
+pip install detect-secrets
+```
+
+After installation, create the baseline file:
+
+```bash
+detect-secrets scan > .detect-secrets.json
+```
+
 #### terraform-docs (Documentation Generator)
 
 ```bash
@@ -155,9 +167,44 @@ SKIP=checkov git commit -m "your commit message"
   - Downloads external Terraform modules for analysis
   - Skips certain checks that may not apply
 
-## Troubleshooting
+- **detect-secrets**: Credential and secret detection
+  - Scans for accidentally committed secrets (API keys, passwords, tokens)
+  - Uses `.detect-secrets.json` baseline to track known secrets
+  - Prevents new credentials from being committed
+  - Supports multiple secret detection plugins (AWS keys, GitHub tokens, etc.)
 
-### Hook Fails on First Run
+## Managing detect-secrets Baseline
+
+### Update Baseline
+
+When you intentionally add new secrets (e.g., test data, example configurations):
+
+```bash
+detect-secrets scan > .detect-secrets.json
+```
+
+### Audit Baseline
+
+Review and mark secrets as true/false positives:
+
+```bash
+detect-secrets audit .detect-secrets.json
+```
+
+This opens an interactive session where you can:
+- Press `y` to mark as a real secret
+- Press `n` to mark as a false positive
+- Press `s` to skip
+
+### Scan New Files
+
+To check if new files contain secrets:
+
+```bash
+detect-secrets scan path/to/files
+```
+
+## Troubleshooting
 
 If hooks fail on the first run, they may need to download/install dependencies:
 
