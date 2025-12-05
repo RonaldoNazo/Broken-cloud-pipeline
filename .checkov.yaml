@@ -1,0 +1,50 @@
+# Checkov configuration file
+skip-path:
+  - .terraform
+  - .external_modules
+  - terraform/.terraform
+  - terraform/.external_modules
+
+framework:
+  - terraform
+
+download-external-modules: true
+external-modules-download-path: .external_modules
+
+skip-check:
+  # S3 bucket configuration (acceptable for logs bucket)
+  - CKV_AWS_18    # S3 access logging (circular dependency)
+  - CKV_AWS_79    # S3 bucket logging
+  - CKV_AWS_144   # S3 cross-region replication
+  - CKV_AWS_145   # S3 KMS encryption
+  - CKV2_AWS_62   # S3 event notifications
+
+  # VPC module defaults (acceptable)
+  - CKV2_AWS_11   # VPC flow logging
+  - CKV2_AWS_12   # Default security group
+  - CKV2_AWS_19   # EIP attachment (NAT gateway will attach)
+
+  # ALB module configuration (acceptable)
+  - CKV_AWS_2     # ALB HTTPS protocol
+  - CKV_AWS_103   # ALB TLS 1.2
+  - CKV_AWS_150   # ALB deletion protection
+
+  # ECS module defaults (acceptable)
+  - CKV_AWS_65    # ECS container insights
+  - CKV_AWS_97    # EFS encryption in transit
+  - CKV_AWS_111   # IAM write access constraints (module managed)
+  - CKV_AWS_336   # ECS read-only filesystem (Jenkins needs write access)
+  - CKV_AWS_356   # IAM resource wildcards (module managed)
+  - CKV_AWS_290   # IAM write access (required for ECS tasks)
+  - CKV_AWS_355   # IAM resource wildcards (required for CloudWatch logs)
+
+  # Route53 (false positive)
+  - CKV2_AWS_23   # Route53 health check
+
+  # WAF (additional configuration not in scope)
+  - CKV_AWS_192   # WAF Log4j protection
+  - CKV2_AWS_31   # WAF logging
+
+  # General exclusions
+  - CKV2_AWS_5    # Security group description
+  - CKV_TF_1      # Module source

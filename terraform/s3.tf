@@ -44,6 +44,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
     expiration {
       days = 90
     }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
   }
 }
 

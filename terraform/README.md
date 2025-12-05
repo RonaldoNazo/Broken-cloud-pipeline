@@ -90,6 +90,7 @@ terraform apply
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.14 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 6.24.0 |
 
 ## Providers
@@ -169,7 +170,6 @@ terraform apply
 |------|-------------|------|---------|:--------:|
 | <a name="input_application_vpc_cidr"></a> [application\_vpc\_cidr](#input\_application\_vpc\_cidr) | CIDR block for Application VPC | `string` | `"10.40.0.0/16"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region to deploy resources | `string` | `"eu-central-1"` | no |
-| <a name="input_budget_limit_amount"></a> [budget\_limit\_amount](#input\_budget\_limit\_amount) | Daily budget limit in USD | `string` | `"1"` | no |
 | <a name="input_jenkins_vpc_cidr"></a> [jenkins\_vpc\_cidr](#input\_jenkins\_vpc\_cidr) | CIDR block for Jenkins VPC | `string` | `"10.41.0.0/16"` | no |
 | <a name="input_notification_email"></a> [notification\_email](#input\_notification\_email) | Email address for SNS notifications | `string` | `"nazoaldo@gmail.com"` | no |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Route53 hosted zone name | `string` | `"ustai.net"` | no |

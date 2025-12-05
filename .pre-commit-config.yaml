@@ -54,12 +54,17 @@ repos:
         name: Terraform lint
         args:
           - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+          - --hook-config=--exclude=**/.terraform/**
+          - --hook-config=--exclude=**/.external_modules/**
 
       - id: terraform_trivy
         name: Terraform security scan (trivy)
         args:
           - --args=--severity=CRITICAL,HIGH,MEDIUM
-          - --args=--skip-dirs="**/.terraform"
+          - --args=--skip-dirs=".terraform"
+          - --args=--skip-dirs=".external_modules"
+          - --hook-config=--exclude=**/.terraform/**
+          - --hook-config=--exclude=**/.external_modules/**
 
   # Security and compliance scanning with Checkov
   - repo: https://github.com/bridgecrewio/checkov
@@ -68,12 +73,9 @@ repos:
       - id: checkov
         name: Checkov security scan
         args:
+          - --config-file=.checkov.yaml
           - --quiet
-          - --framework=terraform
-          - --download-external-modules=true
-          - --skip-check=CKV_AWS_79,CKV_AWS_144,CKV_AWS_145,CKV2_AWS_5,CKV_TF_1
           - --compact
         verbose: true
         files: \.tf$
-        exclude: \.terraform/.*$ 
-CKV_TF_1
+        exclude: (\.terraform/.*|\.external_modules/.*)$

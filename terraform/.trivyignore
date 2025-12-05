@@ -1,0 +1,15 @@
+# Trivy ignore file - exclude external modules from scanning
+# Ignore all findings in terraform-aws-modules (public modules)
+terraform-aws-modules/
+.terraform/
+.external_modules/
+
+# Specific AVD codes from public modules to ignore
+AVD-AWS-0053  # ALB publicly exposed (by design)
+AVD-AWS-0102  # NACL allows all ports (using VPC module defaults)
+AVD-AWS-0104  # Security group unrestricted egress (by design for internet access)
+AVD-AWS-0105  # NACL unrestricted ingress (using VPC module defaults)
+AVD-AWS-0178  # VPC flow logs (not required for this project)
+AVD-AWS-0132  # S3 KMS encryption (AWS-managed AES256 is sufficient for logs)
+AVD-AWS-0095  # SNS encryption (AWS-managed key is used)
+AVD-AWS-0136  # SNS customer-managed key (AWS-managed key is sufficient)

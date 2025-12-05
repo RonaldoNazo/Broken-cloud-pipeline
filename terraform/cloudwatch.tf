@@ -1,6 +1,7 @@
 # SNS Topic for alerts
 resource "aws_sns_topic" "alerts" {
-  name = "infrastructure-alerts"
+  name              = "infrastructure-alerts"
+  kms_master_key_id = "alias/aws/sns"
 }
 
 # SNS Topic Subscription for email notifications

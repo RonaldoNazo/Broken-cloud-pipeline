@@ -43,8 +43,9 @@ variable "notification_email" {
   default     = "nazoaldo@gmail.com"
 }
 
-variable "budget_limit_amount" {
-  description = "Daily budget limit in USD"
-  type        = string
-  default     = "1"
-}
+# Commenting ,as the Tag is not yet in the aws account
+# variable "budget_limit_amount" {
+#   description = "Daily budget limit in USD"
+#   type        = string
+#   default     = "1"
+# }
