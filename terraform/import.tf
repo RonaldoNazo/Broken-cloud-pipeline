@@ -10,14 +10,14 @@ import {
 
 }
 
-# Import ECS Task Execution Role Policy Attachment
-import {
-  to = aws_iam_role_policy_attachment.ecs_task_execution_role_policy
-  identity = {
-    role       = "ecsTaskExecutionRole"
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-  }
-}
+# # Import ECS Task Execution Role Policy Attachment
+# import {
+#   to = aws_iam_role_policy_attachment.ecs_task_execution_role_policy
+#   identity = {
+#     role       = "ecsTaskExecutionRole"
+#     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+#   }
+# }
 
 
 # Import ECS Instance Role
@@ -28,12 +28,12 @@ import {
   }
 }
 
-# Import ECS Instance Role Policy Attachment
-import {
-  to = aws_iam_role_policy_attachment.ecs_instance_role_policy
+# # Import ECS Instance Role Policy Attachment
+# import {
+#   to = aws_iam_role_policy_attachment.ecs_instance_role_policy
 
-  identity = {
-    role       = "ecsInstanceRole"
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-  }
-}
+#   identity = {
+#     role       = "ecsInstanceRole"
+#     policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+#   }
+# }

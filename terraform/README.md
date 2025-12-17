@@ -125,6 +125,7 @@ terraform apply
 | [aws_cloudwatch_metric_alarm.jenkins_alb_5xx](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_cloudwatch_metric_alarm.jenkins_health](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_cloudwatch_metric_alarm.route53_5xx](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/cloudwatch_metric_alarm) | resource |
+| [aws_ecr_repository.application](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/ecr_repository) | resource |
 | [aws_ecs_service.application](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/ecs_service) | resource |
 | [aws_ecs_service.jenkins](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/ecs_service) | resource |
 | [aws_ecs_task_definition.application](https://registry.terraform.io/providers/hashicorp/aws/6.24.0/docs/resources/ecs_task_definition) | resource |

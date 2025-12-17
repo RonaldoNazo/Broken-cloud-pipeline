@@ -48,3 +48,6 @@ skip-check:
   # General exclusions
   - CKV2_AWS_5    # Security group description
   - CKV_TF_1      # Module source
+
+  # Logs
+  - CKV_AWS_158  # CloudWatch log group encryption

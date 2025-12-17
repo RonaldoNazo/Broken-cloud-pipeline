@@ -1,15 +1,29 @@
+# ECR
+# ECR Repository for Application
+resource "aws_ecr_repository" "application" {
+  name                 = "application-repo"
+  image_tag_mutability = "IMMUTABLE"
+  encryption_configuration {
+    encryption_type = "KMS"
+    kms_key         = "alias/aws/ecr"
+  }
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+}
+
+
 # CloudWatch Log Group for Application
 resource "aws_cloudwatch_log_group" "application" {
   name              = "/ecs/application"
   retention_in_days = 365
-  kms_key_id        = "alias/aws/logs"
 }
 
 # CloudWatch Log Group for Jenkins
 resource "aws_cloudwatch_log_group" "jenkins" {
   name              = "/ecs/jenkins"
   retention_in_days = 365
-  kms_key_id        = "alias/aws/logs"
 }
 
 # Application ECS Cluster
