@@ -55,6 +55,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -65,9 +70,13 @@ jobs:
           pip install -r requirements.txt
 
       - name: Deploy to ECS
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ vars.ECR_REPOSITORY_NAME }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           python deploy.py \
             --cluster-name "${{ vars.ECS_CLUSTER_NAME }}" \
             --service "${{ vars.ECS_SERVICE_NAME }}" \
             --task-definition "${{ vars.ECS_TASK_DEFINITION }}" \
-            --image "${{ needs.build-and-push.outputs.image }}"
+            --image $REGISTRY/$REPOSITORY:${IMAGE_TAG:0:7}
