@@ -89,8 +89,8 @@ resource "aws_ecs_task_definition" "application" {
   family                   = "application"
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = "4096" # FLAW: Over-allocated CPU and memory - container only needs 256/512 but task has 4096/8192
+  memory                   = "8192"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
 
   container_definitions = jsonencode([

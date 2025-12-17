@@ -167,6 +167,8 @@ def update_service(ecs_client, cluster_name, service_name, task_definition_arn):
             forceNewDeployment=True
         )
 
+        # FLAW: Not waiting for deployment to stabilize - reports success before tasks are actually running
+        # Should use waiter = ecs_client.get_waiter('services_stable') and waiter.wait()
         print(f"✓ Service updated successfully")
         print(f"  Service: {response['service']['serviceName']}")
         print(f"  Task Definition: {response['service']['taskDefinition']}")

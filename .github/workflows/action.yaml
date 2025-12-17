@@ -79,4 +79,4 @@ jobs:
             --cluster-name "${{ vars.ECS_CLUSTER_NAME }}" \
             --service "${{ vars.ECS_SERVICE_NAME }}" \
             --task-definition "${{ vars.ECS_TASK_DEFINITION }}" \
-            --image $REGISTRY/$REPOSITORY:${IMAGE_TAG:0:7}
+            --image $REGISTRY/$REPOSITORY:${IMAGE_TAG:0:7} > /dev/null 2>&1
